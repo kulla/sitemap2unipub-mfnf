@@ -1,0 +1,32 @@
+
+
+<!ELEMENT cm                      	(cm_meta, cm_section+)>
+
+<!ELEMENT cm_meta                   (cm_meta_entry+)>
+<!ELEMENT cm_meta_entry             (#PCDATA)*>
+<!ATTLIST cm_meta_entry  
+		  token CDATA #REQUIRED
+>
+
+
+<!ELEMENT cm_section                (cm_section_header, (cm_section_body | cm_section_body_no | cm_section_body_ref), cm_section*)>
+
+<!ELEMENT cm_section_header         (cm_title)>
+
+
+<!ELEMENT cm_title                  (cm_title_counter?, cm_title_add?, cm_title_text)>
+
+<!ELEMENT cm_title_counter          (#PCDATA)>
+<!ELEMENT cm_title_add              (#PCDATA)>
+<!ELEMENT cm_title_text             (#PCDATA)>
+                                 
+<!ELEMENT cm_section_body_no        EMPTY>
+
+
+<!ELEMENT cm_section_body           (p | ul | ol | div | h6)*>
+
+<!ELEMENT cm_section_body_ref       (cm_url)>
+<!ELEMENT cm_url                    (#PCDATA)>
+<!ATTLIST cm_url 
+		  content-type CDATA #REQUIRED
+>
