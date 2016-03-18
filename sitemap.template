@@ -1,0 +1,39 @@
+{% macro section(node) -%}
+    <cm_section>
+        <cm_section_header>
+            <cm_title>
+                <cm_title_text>{{node.name}}</cm_title_text>
+            </cm_title>
+        </cm_section_header>
+        {% if node.is_article() %}
+            <cm_section_body_ref>
+                <cm_url content-type="text/html">http://de.wikibooks.org/api/rest_v1/page/html/{{node.link|urlencode}}</cm_url>
+            </cm_section_body_ref>
+        {% else %}
+            <cm_section_body_no />
+        {% endif %}
+        {{ sections(node) }}
+    </cm_section>
+{%- endmacro %}
+{% macro sections(node) -%}
+    {% for child in node.children %}
+        {{ section(child) }}
+    {% endfor %}
+{%- endmacro %}
+<cm>
+    <cm_meta>
+        <cm_meta_entry token="buchtitel">Mathe für Nicht-Freaks</cm_meta_entry>
+        <cm_meta_entry token="autor">Diverse Autoren des Teams „Mathe für Nicht-Freaks“</cm_meta_entry>
+        <cm_meta_entry token="uni">TU München</cm_meta_entry>
+        <cm_meta_entry token="buchuntertitel" />
+        <cm_meta_entry token="buchauflage" />
+        <cm_meta_entry token="widmung">Für alle die wirklich Mathe verstehen wollen</cm_meta_entry>
+        <cm_meta_entry token="lizenz" />
+        <cm_meta_entry token="datum">2016</cm_meta_entry>
+        <cm_meta_entry token="stempel" />
+        <cm_meta_entry token="personalcopy" />
+        <cm_meta_entry token="linkmark" />
+        <cm_meta_entry token="zusammenfassung">Hier steht die Zusammenfassung</cm_meta_entry>
+    </cm_meta>
+    {{ sections(sitemap) }}
+</cm>
